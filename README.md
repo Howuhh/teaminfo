@@ -8,7 +8,7 @@ Select team name and wait :3
 
 ## Screenshot
 
-<img width="360" height="225" src="imgs/example.png">
+<img width="420" height="360" src="imgs/example.png">
 
 ## Links
 
