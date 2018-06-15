@@ -3,7 +3,9 @@
     _tr_ = document.createElement('tr'),
     _th_ = document.createElement('th'),
     _td_ = document.createElement('td');
-    
+
+    _table_.className = "table"
+
     function buildHtmlTable(arr) {
         var table = _table_.cloneNode(false),
         columns = addAllColumnHeaders(arr, table);
@@ -19,7 +21,7 @@
         }
         return table;
     }
-    
+
     // Adds a header row to the table and returns the set of columns.
     // Need to do union of keys from all records as some records may not contain
     // all records
@@ -40,11 +42,11 @@
         table.appendChild(tr);
         return columnSet;
     }
-    
+
 
 function onReceived(obj) {
-    var url = 'http://p20.piterdata.ninja/GetTeamStruct?t_id=' + obj.selectedText;
-    
+    var url = 'http://127.0.0.1:8120/GetTeamStruct?t_id=' + obj.selectedText;
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
@@ -53,17 +55,18 @@ function onReceived(obj) {
             var table = buildHtmlTable(data)
             document.getElementById("output").appendChild(table);
         }
-    }; 
+    };
     xhr.open("GET", url, true);
     xhr.send();
+
+    console.log(obj.selectedText);
 }
 
 // When the popup HTML has loaded
 window.addEventListener('load', function(evt) {
     // Get the event page
     chrome.runtime.getBackgroundPage(function(eventPage) {
-        
+
         eventPage.getPageDetails(onReceived);
     });
 });
-
